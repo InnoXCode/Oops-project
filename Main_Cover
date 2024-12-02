@@ -1,0 +1,96 @@
+package FirstProject;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Main_Cover implements ActionListener {
+
+    Label l;
+    JFrame f;
+    JButton b1;
+
+    // Constructor
+    Main_Cover() {
+        f = new JFrame() {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g);
+                // Load and draw the background image
+                ImageIcon icon = new ImageIcon("C:\\Users\\sunil\\OneDrive\\Desktop\\FirstProject\\src\\FirstProject\\endn2.jpg");
+                Image img = icon.getImage();
+                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
+        // Frame dimensions
+        int frameWidth = 800;
+        int frameHeight = 600;
+        f.setSize(frameWidth, frameHeight);
+
+        // Create and configure the label
+        l = new Label(" P R O J E C T   O N   E N C R Y P T I O N   D E C R Y P T I O N ");
+        l.setBackground(Color.black);
+        l.setForeground(new Color(255, 223, 0)); // Gold color to stand out
+        l.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+        // Center the label horizontally and set it at the top
+        int labelWidth = 740;
+        int labelHeight = 50;
+        int labelX = (frameWidth - labelWidth) / 2;
+        int labelY = 50;
+        l.setBounds(labelX, labelY, labelWidth, labelHeight);
+        f.add(l);
+
+        // Create and configure the button
+        b1 = new JButton(" ENCRYPTION OF DATA ");
+        b1.setBackground(Color.darkGray);
+        b1.setForeground(Color.white);
+        b1.setFont(new Font("Times New Roman", Font.BOLD, 18)); // Increased font size for better readability
+
+        // Adjusted button width and height for better visibility
+        int buttonWidth = 250; // Increased width for better visibility
+        int buttonHeight = 50; // Increased height for better visibility
+        int buttonX = (frameWidth - buttonWidth) / 2; // Centered horizontally
+        int buttonY = labelY + labelHeight + 50; // Positioned below the label
+        b1.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+        b1.addActionListener(this);
+        f.add(b1);
+
+        // Configure the frame
+        f.setLayout(null);
+        f.setVisible(true);
+
+        // Add a close listener to the frame
+        close cm = new close();
+        f.addWindowListener(cm);
+    }
+
+    // Action listener for button clicks
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b1) {
+            f.dispose();
+            Design cp = new Design();
+            cp.setVisible(true);
+        }
+    }
+
+    // Main method
+    public static void main(String args[]) {
+        new Main_Cover();
+    }
+
+    // Inner class to handle window closing
+    class close extends WindowAdapter {
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
+        }
+    }
+
+    // Placeholder for the setVisible method in the Design class
+    public void setVisible(boolean b) {
+        // TODO Auto-generated method stub
+    }
+}
