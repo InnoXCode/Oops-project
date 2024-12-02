@@ -1,0 +1,123 @@
+package FirstProject;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Design implements ItemListener, ActionListener {
+
+    Checkbox b1, b2;
+    JButton b11;
+    Label l;
+    JFrame f;
+
+    // Constructor
+    Design() {
+        f = new JFrame() {
+            @Override
+            public void paint(Graphics g) {
+                super.paint(g);
+                // Load and draw the background image
+                ImageIcon icon = new ImageIcon("C:\\Users\\sunil\\OneDrive\\Desktop\\FirstProject\\src\\FirstProject\\endn2.jpg");
+                Image img = icon.getImage();
+                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
+        // Frame dimensions
+        int frameWidth = 800;
+        int frameHeight = 600;
+        f.setSize(frameWidth, frameHeight);
+
+        // Create and configure the label
+        l = new Label("   S E L E C T   Y O U R   O P T I O N ");
+        l.setBounds(180, 50, 300, 50);
+        f.add(l);
+
+        l.setBackground(Color.black);
+        l.setForeground(Color.white);
+        l.setFont(new Font("Times New Roman", Font.BOLD, 16));
+
+        // Create and configure the checkboxes
+        CheckboxGroup cb = new CheckboxGroup();
+
+        b1 = new Checkbox(" SYMMETRIC ENCRYPTION ", cb, false);
+        b1.setBounds(250, 150, 200, 40);
+        b1.setBackground(Color.orange);
+        b1.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        b1.setForeground(Color.black);
+        f.add(b1);
+
+        b2 = new Checkbox(" ASYMMETRIC ENCRYPTION ", cb, false);
+        b2.setBounds(250, 210, 200, 40);
+        b2.setBackground(Color.darkGray);
+        b2.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        b2.setForeground(Color.white);
+        f.add(b2);
+
+        // Add item listeners to checkboxes
+        b2.addItemListener(this);
+        b1.addItemListener(this);
+
+        // Create and configure the back button
+        b11 = new JButton(" BACK ");
+        b11.setBounds(30, 450, 100, 30);
+        b11.setBackground(Color.black);
+        b11.setForeground(Color.white);
+        b11.setFont(new Font("Algerian", Font.BOLD, 12));
+        b11.addActionListener(this);
+        f.add(b11);
+
+        // Configure the frame
+        f.setLayout(null);
+        f.setVisible(true);
+
+        // Add a close listener to the frame
+        close cm = new close();
+        f.addWindowListener(cm);
+    }
+
+    // Item listener method
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getSource() == b1) {
+            f.dispose();
+            Symmetric cp = new Symmetric();
+            cp.setVisible(true);
+        }
+        if (e.getSource() == b2) {
+            f.dispose();
+            Asymmetric cp = new Asymmetric();
+            cp.setVisible(true);
+        }
+    }
+
+    // Main method
+    public static void main(String args[]) {
+        new Design();
+    }
+
+    // Inner class to handle window closing
+    class close extends WindowAdapter {
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
+        }
+    }
+
+    // Placeholder for the setVisible method (optional)
+    public void setVisible(boolean b) {
+        // TODO Auto-generated method stub
+    }
+
+    // Action listener for back button
+    @Override
+    public void actionPerformed(ActionEvent a) {
+        if (a.getSource() == b11) {
+            f.dispose();
+            Main_Cover c = new Main_Cover();
+            c.setVisible(true);
+        }
+    }
+}
